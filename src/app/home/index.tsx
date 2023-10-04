@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import reactLogo from 'assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './index.css'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { selector as counterSelectors, action as counterAction } from 'core/redux/counter'
 
-function App() {
+const Home = () => {
 	const [amount, setAmount] = useState('0')
 
 	const count = useSelector(counterSelectors.counterSelectCount)
@@ -81,4 +81,4 @@ function App() {
 	)
 }
 
-export default App
+export default Home

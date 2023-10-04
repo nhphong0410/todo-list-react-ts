@@ -55,9 +55,9 @@ type CounterIncreaseAsyncSuccess = ReturnType<typeof counterIncreaseAsyncSuccess
 type CounterIncreaseAsyncError = ReturnType<typeof counterIncreaseAsyncError>
 
 export type Action =
-    | CounterIncrease
-    | CounterDecrease
-    | CounterIncreaseByAmount
-    | CounterIncreaseAsyncStart
-    | CounterIncreaseAsyncSuccess
-    | CounterIncreaseAsyncError
+    & CounterIncrease
+    & CounterDecrease
+    & CounterIncreaseByAmount
+    & CounterIncreaseAsyncStart
+    & CounterIncreaseAsyncSuccess
+    & CounterIncreaseAsyncError
