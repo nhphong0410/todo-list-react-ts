@@ -61,3 +61,5 @@ export type Action =
     & CounterIncreaseAsyncStart
     & CounterIncreaseAsyncSuccess
     & CounterIncreaseAsyncError
+
+Object.freeze(ActionTypes)
