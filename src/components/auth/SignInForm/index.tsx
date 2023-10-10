@@ -8,7 +8,7 @@ import {
     ErrorMessage
 } from 'formik';
 import { schema as SignInFormSchema } from './schema';
-import AuthInput from 'components/auth/AuthInput';
+import Input from 'components/auth/Input';
 import { UserIcon, LockClosedIcon } from '@heroicons/react/24/solid'
 
 const SignInForm = (props: SignInFormProps) => {
@@ -37,13 +37,14 @@ const SignInForm = (props: SignInFormProps) => {
                             name='email'
                             type='email'
                             placeholder='email@example.com'
-                            component={AuthInput}
+                            component={Input}
                         />
                     </div>
                     <span className='absolute bottom-0 right-0 text-red-600 text-sm'>
                         <ErrorMessage
                             name='email'
                             component='span'
+                            className='animate-text-appear'
                         />
                     </span>
                 </div>
@@ -57,18 +58,24 @@ const SignInForm = (props: SignInFormProps) => {
                             name='password'
                             type='password'
                             placeholder='password'
-                            component={AuthInput}
+                            component={Input}
                         />
                     </div>
                     <span className='absolute bottom-0 right-0 text-red-600 text-sm'>
                         <ErrorMessage
                             name='password'
                             component='span'
+                            className='animate-text-appear'
                         />
                     </span>
                 </div>
-                <div>
-                    <button type='submit'>Sign in</button>
+                <div className='flex justify-center items-center mt-6'>
+                    <button
+                        type='submit'
+                        className='rounded-md bg-emerald-600 shadow-md shadow-emerald-500/50 text-white px-8 py-2 transition active:bg-emerald-700'
+                    >
+                        Sign in
+                    </button>
                 </div>
             </Form>
         </Formik>
