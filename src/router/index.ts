@@ -1,20 +1,24 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import Auth from 'app/auth';
-import Home from 'app/home'
-import NotFound from 'app/not-found';
-import HomeLayout from './layouts/HomeLayout';
-import User from 'app/home/user';
-import SignInLayout from './layouts/SignInLayout';
+import { authLoader } from './loaders/authLoader';
+
+const Auth = lazy(() => import('app/auth'))
+const Home = lazy(() => import('app/home'))
+const NotFound = lazy(() => import('app/not-found'))
+const HomeLayout = lazy(() => import('./layouts/HomeLayout'))
+const User = lazy(() => import('app/home/user'))
+const AuthLayout = lazy(() => import('./layouts/AuthLayout'))
 
 const router = createBrowserRouter([
     {
-        id: 'sign-in',
+        id: 'auth',
         path: '/auth',
-        Component: SignInLayout,
+        Component: AuthLayout,
         children: [
             {
                 path: '',
-                Component: Auth
+                Component: Auth,
+                loader: authLoader
             }
         ]
     },
@@ -35,8 +39,13 @@ const router = createBrowserRouter([
     },
     {
         id: 'not-found',
-        path: '*',
+        path: 'not-found',
         Component: NotFound
+    },
+    {
+        id: 'no-match',
+        path: '*',
+        Component: NotFound,
     }
 ])
 

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-const SignInLayout = () => {
+const AuthLayout = () => {
     return (
         <div className='w-screen h-screen box-border flex flex-col'>
             <main className='flex-grow'>
@@ -14,4 +14,4 @@ const SignInLayout = () => {
     )
 }
 
-export default SignInLayout
+export default AuthLayout

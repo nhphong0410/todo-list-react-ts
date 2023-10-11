@@ -1,4 +1,4 @@
-const Input = ({ field, form, className, ...props }: any) => {
+const TextInput = ({ field, form, className, ...props }: any) => {
     return (
         <input
             {...field}
@@ -8,4 +8,4 @@ const Input = ({ field, form, className, ...props }: any) => {
     )
 }
 
-export default Input
+export default TextInput

@@ -1,34 +1,36 @@
 import {
     Formik,
-    FormikHelpers,
-    FormikProps,
     Form,
     Field,
-    FieldProps,
     ErrorMessage
 } from 'formik';
 import { schema as SignInFormSchema } from './schema';
-import Input from 'components/auth/Input';
+import TextInput from 'components/auth/TextInput';
 import { UserIcon, LockClosedIcon } from '@heroicons/react/24/solid'
+import SubmitButton from '../SubmitButton';
 
 const SignInForm = (props: SignInFormProps) => {
     const initialValues: SignInFormValues = {
         email: '',
         password: '',
-        name: ''
     }
 
     return (
         <Formik
             initialValues={initialValues}
-            onSubmit={(values, actions) => {
-                console.log(JSON.stringify(values, null, 2))
+            onSubmit={(values, _) => {
+                const data = {
+                    email: values.email,
+                    password: values.password
+                }
+
+                props.onSignIn(data)
             }}
             validationSchema={SignInFormSchema}
         >
             <Form>
                 <div className='relative flex align-middle pb-4'>
-                    <label htmlFor="email" className='inline-block w-8 h-8 '>
+                    <label htmlFor="email" className='inline-block w-8 h-8 text-emerald-600'>
                         <span><UserIcon /></span>
                     </label>
                     <div className='flex-grow ml-2'>
@@ -37,7 +39,7 @@ const SignInForm = (props: SignInFormProps) => {
                             name='email'
                             type='email'
                             placeholder='email@example.com'
-                            component={Input}
+                            component={TextInput}
                         />
                     </div>
                     <span className='absolute bottom-0 right-0 text-red-600 text-sm'>
@@ -49,7 +51,7 @@ const SignInForm = (props: SignInFormProps) => {
                     </span>
                 </div>
                 <div className='relative flex align-middle pb-4'>
-                    <label htmlFor="password" className='inline-block w-8 h-8'>
+                    <label htmlFor="password" className='inline-block w-8 h-8 text-emerald-600'>
                         <span><LockClosedIcon /></span>
                     </label>
                     <div className='flex-grow ml-2'>
@@ -58,7 +60,7 @@ const SignInForm = (props: SignInFormProps) => {
                             name='password'
                             type='password'
                             placeholder='password'
-                            component={Input}
+                            component={TextInput}
                         />
                     </div>
                     <span className='absolute bottom-0 right-0 text-red-600 text-sm'>
@@ -70,12 +72,11 @@ const SignInForm = (props: SignInFormProps) => {
                     </span>
                 </div>
                 <div className='flex justify-center items-center mt-6'>
-                    <button
+                    <SubmitButton
+                        title='Sign in'
                         type='submit'
-                        className='rounded-md bg-emerald-600 shadow-md shadow-emerald-500/50 text-white px-8 py-2 transition active:bg-emerald-700'
-                    >
-                        Sign in
-                    </button>
+                        loading={props.loading}
+                    />
                 </div>
             </Form>
         </Formik>
@@ -87,9 +88,14 @@ export default SignInForm
 type SignInFormValues = {
     email: string,
     password: string,
-    name: string
 }
 
 export type SignInFormProps = {
+    loading: boolean,
+    onSignIn: (data: OnSignInParams) => void
+}
 
+export type OnSignInParams = {
+    email: string
+    password: string
 }
