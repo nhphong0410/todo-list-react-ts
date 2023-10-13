@@ -1,20 +1,14 @@
-import { put, takeEvery, delay } from "redux-saga/effects";
+import { put, takeEvery, takeLatest, call } from "redux-saga/effects";
 import { Action, actions, ActionTypes } from './action'
+import { createEmailSession, getCurrentSession, signOut, GetCurrentSession } from "core/services/auth";
 
 export function* authSignInStart(action: Action) {
     try {
-        console.log(action)
-
-        yield delay(1000)
-
-        const number = Math.floor(Math.random() * 10)
-
-        if (!number) {
-            throw new Error
-        }
-
+        yield call(createEmailSession, action.payload.email, action.payload.password)
 
         yield put(actions.authSignInSuccess())
+
+        return
     } catch (error) {
         yield put(actions.authSignInError())
     } finally {
@@ -22,6 +16,29 @@ export function* authSignInStart(action: Action) {
     }
 }
 
-export default function* counterSaga() {
-    yield takeEvery(ActionTypes.SIGN_IN_START, authSignInStart);
+export function* authSignInSuccess() {
+    try {
+        const currentSession: GetCurrentSession = yield call(getCurrentSession)
+        console.log(currentSession)
+
+        return
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function* authSignInFinish() {
+    try {
+        yield call(signOut)
+
+        return
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export default function* authSaga() {
+    yield takeLatest(ActionTypes.SIGN_IN_START, authSignInStart);
+    yield takeEvery(ActionTypes.SIGN_IN_FINISH, authSignInFinish);
+    yield takeEvery(ActionTypes.SIGN_IN_SUCCESS, authSignInSuccess)
 }

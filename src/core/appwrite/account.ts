@@ -1,6 +1,4 @@
 import { Account } from "appwrite"
-import client from "./client"
+import { client } from "./client"
 
-const account = new Account(client)
-
-export default account
+export const account = new Account(client)

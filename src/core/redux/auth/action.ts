@@ -8,9 +8,6 @@ export const ActionTypes = {
 }
 
 // payload types
-type CounterIncreaseByAmountPayload = {
-    amount: number
-};
 type AuthSignInStartPayload = {
     email: string,
     password: string
