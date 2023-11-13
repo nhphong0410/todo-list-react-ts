@@ -1,4 +1,4 @@
-import { AuthActions } from "core/constants"
+import { AuthActions } from "core/constant"
 
 const authSearchParamsGuard = (location: Location) => {
     const searchParams = new URLSearchParams(location.search)
