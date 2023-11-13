@@ -2,7 +2,7 @@ import {
     useFormik
 } from 'formik';
 import { schema } from './schema';
-import { UserIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
+import { Account, Password } from 'component/icons';
 
 const Form = (props: FormProps) => {
 
@@ -18,7 +18,6 @@ const Form = (props: FormProps) => {
                 email: values.email,
                 password: values.password
             }
-            
             props.onSubmit(data)
         },
         validationSchema: (schema)
@@ -26,11 +25,11 @@ const Form = (props: FormProps) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div className='relative flex align-middle pb-4'>
-                <label htmlFor="email" className='inline-block w-8 h-8 text-emerald-600'>
-                    <span><UserIcon /></span>
+            <div>
+                <label htmlFor="email">
+                    <Account size={8} />
                 </label>
-                <div className='flex-grow ml-2'>
+                <div>
                     <input
                         id='email'
                         name='email'
@@ -39,20 +38,17 @@ const Form = (props: FormProps) => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.email}
-                        className='block outline-none w-full border-b border-emerald-600 bg-transparent focus:border-emerald-700 transition'
                     />
                 </div>
-                <span
-                    className='absolute bottom-0 right-0 text-red-600 text-sm'
-                >
+                <span>
                     {formik.touched.email && formik.errors.email}
                 </span>
             </div>
-            <div className='relative flex align-middle pb-4'>
-                <label htmlFor="email" className='inline-block w-8 h-8 text-emerald-600'>
-                    <span><LockClosedIcon /></span>
+            <div>
+                <label htmlFor="password">
+                    <span><Password size={8} /></span>
                 </label>
-                <div className='flex-grow ml-2'>
+                <div>
                     <input
                         id='password'
                         name='password'
@@ -61,22 +57,19 @@ const Form = (props: FormProps) => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.password}
-                        className='block outline-none w-full border-b border-emerald-600 bg-transparent focus:border-emerald-700 transition'
+
                     />
                 </div>
-                <span
-                    className='absolute bottom-0 right-0 text-red-600 text-sm'
-                >
+                <span>
                     {formik.touched.password && formik.errors.password}
                 </span>
             </div>
-            <div className='flex justify-center items-center mt-6'>
+            <div>
                 <button
-                    className='flex justify-center items-center w-32 h-10 rounded-md bg-emerald-600 shadow-md shadow-emerald-500/50 text-white transition active:bg-emerald-700 disabled:bg-emerald-700'
                     type='submit'
                     disabled={props.isLoading}
                 >
-                    {props.isLoading ? <span className='inline-block w-5 animate-spin'><ArrowPathIcon /></span> : <span>Sign in</span>}
+                    {props.isLoading ? <span></span> : <span>Sign in</span>}
                 </button>
             </div>
         </form>

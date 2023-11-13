@@ -22,7 +22,7 @@ const SignIn = () => {
 	}
 
 	return (
-		<div className='max-w-[400px] mx-auto px-2 py-20'>
+		<div>
 			<Form
 				isLoading={isLoading}
 				onSubmit={onSubmit}
