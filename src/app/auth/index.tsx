@@ -1,7 +1,7 @@
-import { SignIn } from './components'
+import { SignIn } from './component'
 import { AuthActions } from 'core/constant'
 import { useLocation, useSearchParams } from 'react-router-dom'
-import SignUp from './components/SignUp'
+import SignUp from './component/SignUp'
 
 const Auth = () => {
     const { search } = useLocation()
